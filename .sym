@@ -1,0 +1,13 @@
+
+
+hst_destroy
+hst_get
+hst_init
+hst_put
+hst_repl
+
+
+sihash
+
+sshash
+swhash

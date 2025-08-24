@@ -15,7 +15,8 @@ install: build/libhslib.a build/libhslib.so
 	mkdir -p install/include
 	cp -r include/* install/include/
 	cp $^ install/
-	cd install && zip -r hslib.zip include/ *.a *.so
+	cp .sym install/
+	cd install && zip -r hslib.zip include/ *.a *.so .sym
 
 build/libhslib.a: build/hst.o build/strh.o
 	${AR} rcs $@ $^
@@ -27,10 +28,12 @@ build/test/hst: test/hst.c build/libhslib.a
 
 build/%.o: src/%.c
 	${CC} ${cflags} $< -c -o $@
+	nm -g $@ | awk '{print $$3}' >> .sym
 build/shared/%.o: src/%.c
 	${CC} ${cflags} $< -fPIC -c -o $@
 
 clean:
 	rm -rf build
+	rm .sym
 
 .PHONY: build tbuild test install clean init
