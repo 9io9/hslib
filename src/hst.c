@@ -41,6 +41,7 @@ Error hst_put(Hst* hst, void* data) {
     int islot = hst->fhash(hst->cap, data);
 
     hst->fcopy(hst->t[islot].d, data);
+    hst->t[islot].has_value = true;
 
     return ERROR(NULL, 0);
 }
@@ -53,6 +54,7 @@ Error hst_repl(Hst* hst, void* data, void* ndata) {
     int islot = hst->fhash(hst->cap, data);
 
     hst->fcopy(hst->t[islot].d, ndata);
+    hst->t[islot].has_value = true;
 
     return ERROR(NULL, 0);
 }

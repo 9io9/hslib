@@ -15,7 +15,7 @@ add_custom_command(
 
 add_custom_target(hslgech DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/ec.h)
 
-add_library(hslib STATIC src/hst.c)
+add_library(hslib STATIC src/hst.c src/strh.c)
 add_dependencies(hslib hslgech)
 
 target_include_directories(hslib PRIVATE include lib)
@@ -53,5 +53,5 @@ install(
 )
 
 
-# enable_testing()
-# add_subdirectory(test)
+enable_testing()
+add_subdirectory(test)
